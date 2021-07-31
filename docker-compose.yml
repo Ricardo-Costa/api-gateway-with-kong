@@ -170,11 +170,14 @@ services:
       - kong-net
     environment:
       DEBUG: "*"
+      PORT: 3001
       NODE_ENV: production
     volumes:
       - ./api1:/var/www/api1
     working_dir: /var/www/api1/
     entrypoint: "npm start /var/www/api1/bin/www"
+    ports:
+      - "3001:3001"
 
   api2:
     container_name: api2
@@ -183,8 +186,11 @@ services:
       - kong-net
     environment:
       DEBUG: "*"
+      PORT: 3002
       NODE_ENV: production
     volumes:
       - ./api2:/var/www/api2
     working_dir: /var/www/api2/
     entrypoint: "npm start /var/www/api2/bin/www"
+    ports:
+      - "3002:3002"
