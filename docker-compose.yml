@@ -13,7 +13,9 @@ volumes:
 
 networks:
   kong-net:
-    external: false
+    external: true
+    driver: bridge
+#    external: false
 
 services:
   kong-migrations:
@@ -90,9 +92,10 @@ services:
       retries: 10
     restart: on-failure
 #    restart: on-failure:5
-    read_only: true
+#    read_only: true
     volumes:
-      - kong_prefix_vol:${KONG_PREFIX:-/var/run/kong}
+      - kong_prefix_vol:/var/run/kong
+#      - kong_prefix_vol:${KONG_PREFIX:-/var/run/kong}
       - kong_tmp_vol:/tmp
     deploy:
       restart_policy:
